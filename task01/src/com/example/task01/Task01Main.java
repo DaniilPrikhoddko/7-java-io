@@ -1,5 +1,7 @@
 package com.example.task01;
 
+import java.io.Console;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,7 +17,16 @@ public class Task01Main {
     }
 
     public static int checkSumOfStream(InputStream inputStream) throws IOException {
-        // your implementation here
-        return 0;
+        if (inputStream == null) {
+            throw new IllegalArgumentException();
+        }
+        int checkSum = 0;
+        int B = inputStream.read();
+
+        while (B != -1) {
+            checkSum = Integer.rotateLeft(checkSum, 1) ^ B;
+            B = inputStream.read();
+        }
+        return checkSum;
     }
 }
